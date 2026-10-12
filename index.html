@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cellstrike AI — Battery Health Intelligence</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">C<span>+</span></div><div><b>Cellstrike AI</b><small>BY CODE SPARKS</small></div></div>
+    <div class="side-label">WORKSPACE</div>
+    <nav id="navigation">
+      <button class="nav-item active" data-page="overview"><span>◫</span> Health overview</button>
+      <button class="nav-item" data-page="explain"><span>⌁</span> Explainability</button>
+      <button class="nav-item" data-page="passport"><span>▤</span> Life passport</button>
+      <button class="nav-item" data-page="upload"><span>⇧</span> Upload data</button>
+      <button class="nav-item" data-page="team"><span>♧</span> Team</button>
+    </nav>
+    <div class="sidebar-bottom"><div class="status-dot"></div><div><b>Demo environment</b><small>Local model · illustrative output</small></div></div>
+  </aside>
+  <main class="main">
+    <header class="topbar"><div class="breadcrumb">BATTERY INTELLIGENCE <span>/</span> <b id="crumb">OVERVIEW</b></div><div class="top-right"><span class="live-dot"></span> SYSTEM ONLINE <div class="avatar">CS</div></div></header>
+    <section class="page active" id="overview">
+      <div class="page-heading"><div><div class="eyebrow">EV BATTERY ANALYTICS <span class="pill">BETA</span></div><h1>Battery health intelligence</h1><p>Understand your battery today. Make smarter decisions for tomorrow.</p></div><div class="heading-actions"><button class="btn btn-quiet" id="resetBtn">Reset values</button><button class="btn btn-primary" id="topEstimate">↗ Run estimate</button></div></div>
+      <div class="notice"><span>ⓘ</span><div><b>Decision support, not a certified test</b><small>Estimates are illustrative and should not replace an OEM diagnostic or professional battery inspection.</small></div><button class="notice-x" id="dismissNotice">×</button></div>
+      <div class="metric-row">
+        <article class="metric-card"><div class="metric-label">STATE OF HEALTH <span>↗</span></div><div class="metric-value" id="metricSoh">78.4<span>%</span></div><div class="metric-foot"><i class="mini-line"></i><span class="positive">+0.8% this month</span></div></article>
+        <article class="metric-card"><div class="metric-label">CELL DELTA <span>⌁</span></div><div class="metric-value">18<span> mV</span></div><div class="metric-foot"><span class="dot green"></span> Balanced · within target</div></article>
+        <article class="metric-card"><div class="metric-label">LAST SESSION <span>◷</span></div><div class="metric-value">2.4<span> h</span></div><div class="metric-foot">Fast-charge session · Oct 10</div></article>
+        <article class="metric-card accent-card"><div class="metric-label">12-MO FORECAST <span>⌁</span></div><div class="metric-value" id="forecast">73.4<span>%</span></div><div class="metric-foot">Projected health · next 12 months</div></article>
+      </div>
+      <div class="content-grid">
+        <section class="panel estimate-panel"><div class="panel-heading"><div><div class="eyebrow">INPUT PARAMETERS</div><h2>What’s happening inside this pack?</h2></div><span class="step-count">01 / 02</span></div>
+          <form id="estimateForm">
+            <div class="form-grid">
+              <label>Battery format<select id="chemistry"><option value="NMC">NMC · Nickel Manganese Cobalt</option><option value="LFP">LFP · Lithium Iron Phosphate</option><option value="NCA">NCA · Nickel Cobalt Aluminium</option></select></label>
+              <label>Vehicle class<select id="vehicle"><option>Passenger EV</option><option>Electric two-wheeler</option><option>Commercial EV</option><option>Electric bus</option></select></label>
+              <label>Age in service <span class="input-value" id="ageOut">3 years</span><input id="age" type="range" min="0" max="15" value="3"></label>
+              <label>Total cycles <span class="input-value" id="cyclesOut">820 cycles</span><input id="cycles" type="range" min="0" max="2500" step="10" value="820"></label>
+              <label>DC fast charging <span class="input-value" id="fastOut">34% sessions</span><input id="fast" type="range" min="0" max="100" value="34"></label>
+              <label>Average temperature <span class="input-value" id="tempOut">31°C</span><input id="temp" type="range" min="0" max="55" value="31"></label>
+              <label>Depth of discharge <span class="input-value" id="dodOut">68% typical</span><input id="dod" type="range" min="10" max="100" value="68"></label>
+              <label>Internal resistance <span class="input-value" id="resOut">108 mΩ</span><input id="res" type="range" min="30" max="250" value="108"></label>
+            </div>
+            <div class="form-footer"><small><span class="dot green"></span> All fields are editable demo inputs</small><button class="btn btn-primary" type="submit">Run new estimate <span>→</span></button></div>
+          </form>
+        </section>
+        <section class="panel snapshot-panel"><div class="panel-heading"><div><div class="eyebrow">PACK DIGITAL TWIN</div><h2>Pack health snapshot</h2></div><span class="tiny-badge">LIVE DEMO</span></div>
+          <div class="snapshot-top"><div><small>ESTIMATED AVAILABLE CAPACITY</small><div class="big-number" id="capacity">78.4<span>%</span></div><div class="subtle">of original usable capacity</div></div><div class="health-ring" id="healthRing"><div><b id="ringNum">78</b><small>SOH</small></div></div></div>
+          <div class="battery-visual"><div class="battery-label"><span>96 CELL ARRAY</span><span>8 MODULES</span></div><div class="cell-grid" id="cellGrid"></div><div class="battery-caption"><span><i class="legend healthy"></i> Stable cells</span><span><i class="legend watch"></i> Monitor</span><span><i class="legend risk"></i> Elevated stress</span></div></div>
+          <div class="risk-row"><div><small>SAFETY RISK</small><b id="riskLabel">Moderate</b></div><span class="risk-chip" id="riskChip">● MONITOR</span></div>
+          <div class="snapshot-note">This visual is a simulated digital twin for demonstration; it is not connected to a real vehicle or BMS.</div>
+        </section>
+      </div>
+      <div class="bottom-grid">
+        <section class="panel"><div class="panel-heading"><div><div class="eyebrow">HEALTH TRAJECTORY</div><h2>SOH trend</h2></div><span class="tiny-badge">12 MONTHS</span></div><div class="chart-wrap"><div class="chart-y"><span>100%</span><span>90%</span><span>80%</span><span>70%</span></div><svg id="trendChart" viewBox="0 0 600 150" preserveAspectRatio="none" aria-label="Illustrative battery health trend"></svg></div><div class="chart-x"><span>JAN</span><span>MAR</span><span>MAY</span><span>JUL</span><span>SEP</span><span>DEC</span></div></section>
+        <section class="panel charging-panel"><div class="panel-heading"><div><div class="eyebrow">PRACTICAL ACTIONS</div><h2>Safe charging guide</h2></div><span class="guide-icon">✳</span></div><div class="guide-item"><span class="guide-number">01</span><div><b>Prefer Level 2 overnight</b><p>Use slower AC charging when convenient to reduce heat and stress.</p></div></div><div class="guide-item"><span class="guide-number">02</span><div><b>Protect the comfort zone</b><p>Avoid prolonged exposure to extreme temperatures; aim for 15–30°C where practical.</p></div></div><div class="guide-item"><span class="guide-number">03</span><div><b>Set a daily ceiling</b><p>For everyday driving, an 80% charge limit may help, if your vehicle maker recommends it.</p></div></div></section>
+      </div>
+      <div class="disclaimer">MODEL OUTPUTS ARE SIMULATED FOR PROJECT DEMONSTRATION · NOT A CERTIFIED BATTERY DIAGNOSIS</div>
+    </section>
+    <section class="page" id="explain"><div class="page-heading"><div><div class="eyebrow">MODEL TRANSPARENCY</div><h1>Explainability</h1><p>See which operating conditions influence this illustrative estimate.</p></div><span class="tiny-badge">XAI VIEW</span></div><div class="metric-row compact"><article class="metric-card"><div class="metric-label">MODEL CONFIDENCE</div><div class="metric-value">87<span>%</span></div><div class="metric-foot">Demo confidence score</div></article><article class="metric-card"><div class="metric-label">THERMAL LOAD</div><div class="metric-value">Nominal</div><div class="metric-foot">Based on selected average temperature</div></article><article class="metric-card"><div class="metric-label">FAST-CHARGE SENSITIVITY</div><div class="metric-value">Low</div><div class="metric-foot">Illustrative classification</div></article><article class="metric-card accent-card"><div class="metric-label">SECOND-LIFE POTENTIAL</div><div class="metric-value">75<span>/100</span></div><div class="metric-foot">Screening indicator only</div></article></div><section class="panel"><div class="panel-heading"><div><div class="eyebrow">CONTRIBUTION BREAKDOWN</div><h2>Factors affecting battery health</h2></div></div><div id="factorList" class="factor-list"></div><p class="snapshot-note">Percentages are illustrative feature contributions, not validated causal measurements. A production model would need validated training data and calibration.</p></section></section>
+    <section class="page" id="passport"><div class="page-heading"><div><div class="eyebrow">BATTERY HISTORY</div><h1>Life passport</h1><p>A readable summary of a battery pack’s estimated condition and care history.</p></div><button class="btn btn-primary" id="downloadPassport">Download passport</button></div><section class="panel passport-card"><div class="passport-header"><div class="brand-mark">C<span>+</span></div><div><div class="eyebrow">CELLSTRIKE AI · DIGITAL RECORD</div><h2>Battery life passport</h2><p>Demonstration record · Not an official certificate</p></div></div><div class="passport-stats"><div><small>ESTIMATED SOH</small><b id="passportSoh">78.4%</b></div><div><small>CHEMISTRY</small><b id="passportChem">NMC</b></div><div><small>AGE</small><b id="passportAge">3 years</b></div><div><small>CYCLE COUNT</small><b id="passportCycles">820</b></div></div><h3>Care recommendations</h3><ul><li>Avoid prolonged high temperatures and extreme states of charge.</li><li>Follow the vehicle manufacturer’s charging and maintenance guidance.</li><li>Arrange a professional battery health check before reuse or resale.</li></ul><button class="btn btn-quiet" onclick="window.print()">Print / Save as PDF</button></section></section>
+    <section class="page" id="upload"><div class="page-heading"><div><div class="eyebrow">DATA INGESTION</div><h1>Upload battery data</h1><p>Load a CSV file to preview telemetry columns locally in your browser.</p></div></div><section class="panel upload-panel"><div class="upload-symbol">⇧</div><h2>Bring your battery telemetry</h2><p>Choose a CSV file with columns such as voltage, current, temperature, cycle_count or timestamp.</p><label class="file-button">Choose CSV file<input id="csvFile" type="file" accept=".csv,text/csv" hidden></label><div id="fileStatus" class="file-status">No file selected. Files are read locally and are not uploaded to a server.</div><div id="csvPreview" class="csv-preview"></div></section></section>
+    <section class="page" id="team"><div class="page-heading"><div><div class="eyebrow">PROJECT TEAM</div><h1>Code Sparks</h1><p>Building explainable battery intelligence for smarter EV decisions.</p></div></div><div class="team-grid"><article class="panel team-card"><div class="team-avatar">CS</div><h2>Code Sparks</h2><p>Student innovation team</p><span class="tiny-badge">SIH PROJECT DEMO</span></article><article class="panel"><div class="eyebrow">PROJECT MISSION</div><h2>Make battery health easier to understand.</h2><p class="subtle">Cellstrike AI demonstrates a dashboard concept for estimating battery state of health, explaining contributing factors and presenting a readable life-passport summary.</p><p class="snapshot-note">The current version is a front-end prototype. It does not connect to a vehicle, certified test equipment, or a trained production battery model.</p></article></div></section>
+    <footer>CELLSRIKE AI <span>•</span> BATTERY HEALTH INTELLIGENCE <span>•</span> PROTOTYPE</footer>
+  </main>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="app.js"></script>
+</body></html>
